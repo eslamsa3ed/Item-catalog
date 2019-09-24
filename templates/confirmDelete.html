@@ -1,0 +1,25 @@
+{%extends "base.html"%}
+
+{%block head%}
+<style>
+  #menu-toggle{
+    display: none;
+  }
+  </style>
+{%endblock%}
+
+{%block content%}
+
+<div  class="text-center  align-middle mt-5 form-wrap">
+    <form class="text-left" name="DeleteForm" method="POST">
+        <h4>Delete {{item.name}}</h4>
+        <p>Are you sure you want to delete <strong>{{item.name}}</strong> ?</p>
+        <button type="submit" class="btn btn-danger">Confirm</button>
+       
+      </form>
+</div>
+{%endblock%}
+{%block scripts%}
+
+
+{%endblock%}

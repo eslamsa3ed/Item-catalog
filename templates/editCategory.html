@@ -1,0 +1,36 @@
+{%extends "base.html"%}
+{%block head%}
+{%endblock%}
+{%block sidebar%}
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">Categories </div>
+    <div class="list-group list-group-flush">
+      {% for cate in allCategories %}
+      <a href="/catalog/{{category.name}}/items" class="list-group-item list-group-item-action bg-light">{{cate.name}}</a>
+      {%endfor%}
+      {%if 'username' in session %}
+      <a href="/catalog/category/new" class="list-group-item list-group-item-action bg-gradient-light">Add New category</a>
+      {%endif%}
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+{%endblock%}
+{%block content%}
+
+<div  class="text-center  align-middle mt-5 form-wrap">
+    <form class="text-left" name="newCategory" method="POST">
+        <div class="form-group">
+          <label for="catename">Category Name</label>
+          <input type="text" name="catename" class="form-control" id="catename" aria-describedby="CatHelp" value="{{category.name}}" placeholder="Enter category name">
+          <small id="CatHelp" class="form-text text-muted">Category name must be unique</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-danger" href="/"> Cancel</a>
+      </form>
+</div>
+{%endblock%}
+{%block scripts%}
+
+
+{%endblock%}

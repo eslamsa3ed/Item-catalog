@@ -1,0 +1,29 @@
+{%extends "base.html"%}
+
+{%block sidebar%}
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">Categories </div>
+    <div class="list-group list-group-flush">
+      {% for category in categories %}
+      <a href="/catalog/{{category.name}}/items" class="list-group-item list-group-item-action bg-light">{{category.name}}</a>
+      {%endfor%}
+      {%if 'username' in session %}
+      <a href="/catalog/category/new" class="list-group-item list-group-item-action bg-gradient-light">Add New Category</a>
+      {%endif%}
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+{%endblock%}
+    
+{%block content%}
+    <h1 class="mt-4">Latest Items</h1>
+    
+    <ul>
+        {%for item in items%}
+        <li><a href="/catalog/{{item.category.name}}/{{item.name}}">{{item.name}}</a><span class="text-muted"> ({{item.category.name}})</span></li>
+        {%endfor%}
+    </ul>
+{%endblock%}
+    
+    

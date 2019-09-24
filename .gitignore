@@ -1,2 +1,4 @@
 item_catalog.db
 __pycache__
+client_secret.json
+env.json

@@ -1,0 +1,35 @@
+{%extends "base.html"%}
+
+{%block sidebar%}
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading"><a href="/catalog/{{category.name}}/items">{{category.name}} </a>items </div>
+    <div class="list-group list-group-flush">
+      {% for element in allItems %}
+      <a href="/catalog/{{category.name}}/{{element.name}}" class="list-group-item list-group-item-action {%if element.name ==item.name%}active{%else%}bg-light{%endif%}">{{element.name}}</a>
+      {%endfor%}
+      
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+{%endblock%}
+    
+{%block content%}
+<div class="row">
+  <div class="col-md-6 pt-4">
+    <h1>{{item.name}}</h1>
+    <p>{{item.description}}</p>
+  </div>
+  {%if 'username'in session %}
+  <div class="col-md-6 pt-4 text-right">
+    <!-- <h4>Actions</h4> -->
+    {%if item.user_id == session['user_id']%}
+    <a class="btn btn-outline-primary" href="/catalog/{{category.name}}/{{item.name}}/edit">Edit</a> 
+    <a class="btn btn-outline-danger" href="/catalog/{{category.name}}/{{item.name}}/delete">Delete</a>
+    {%endif%}
+  </div>
+</div>
+  {%endif%}
+{%endblock%}
+    
+    

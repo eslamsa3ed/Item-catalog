@@ -1,0 +1,42 @@
+{%extends "base.html"%}
+{%block head%}
+{%endblock%}
+
+{%block sidebar%}
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading"><a href="/catalog/{{category.name}}/items">{{category.name}} </a>items </div>
+    <div class="list-group list-group-flush">
+      {% for element in allItems %}
+      <a href="/catalog/{{category.name}}/{{element.name}}" class="list-group-item list-group-item-action bg-light">{{element.name}}</a>
+      {%endfor%}
+      {%if 'username' in session %}
+      <a href="/catalog/category/new" class="list-group-item list-group-item-action bg-gradient-light">Add new category</a>
+      {%endif%}
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+{%endblock%}
+
+{%block content%}
+
+<div  class="text-center  align-middle mt-5 form-wrap">
+    <form  class="text-left" name="newItem" method="POST">
+        <div class="form-group">
+          <label for="itemname">Item Name</label>
+          <input type="text" name="itemName" class="form-control" id="itemname" aria-describedby="ItemHelp" placeholder="Enter item name" required>
+          <small id="ItemHelp" class="form-text text-muted">Item name must be unique</small>
+        </div>
+        <div class="form-group">
+          <label for="itemdesc">Item Description</label>
+          <textarea class="form-control" id="itemdesc" name="itemDescription" placeholder="Enter item description" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-danger" href="/"> Cancel</a>
+      </form>
+</div>
+{%endblock%}
+{%block scripts%}
+
+
+{%endblock%}

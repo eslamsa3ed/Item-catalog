@@ -1,0 +1,23 @@
+{%extends "base.html"%}
+{%block head%}
+<style>
+#menu-toggle{
+  display: none;
+}
+</style>
+{%endblock%}
+
+{%block content%}
+
+<div  class="text-center  align-middle mt-5 profile-wrap">
+  <img src="{{session['picture']}}" class="rounded-circle img-responsive mt-2" width="200">
+  <h1>{{session['username']}}</h1>
+  <p class="mb-5">{{session['email']}}</p>
+  <a class="btn btn-outline-danger btn-lg" href="/logout">Logout</a>
+
+</div>
+{%endblock%}
+{%block scripts%}
+
+
+{%endblock%}

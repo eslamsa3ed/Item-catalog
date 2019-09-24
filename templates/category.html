@@ -1,0 +1,45 @@
+{%extends "base.html"%}
+
+{%block sidebar%}
+  <!-- Sidebar -->
+  <div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">Categories </div>
+    <div class="list-group list-group-flush">
+      {% for cate in categories %}
+      <a href="/catalog/{{cate.name}}/items" class="list-group-item list-group-item-action {%if cate.name ==category.name%}active{%else%}bg-light{%endif%}">{{cate.name}}</a>
+      {%endfor%}
+      {%if 'username' in session %}
+      <a href="/catalog/category/new" class="list-group-item list-group-item-action bg-gradient-light">Add new category</a>
+      {%endif%}
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
+{%endblock%}
+    
+{%block content%}
+<div class="row">
+  <div class="col-md-6 pt-4">
+    <h1 >{{category.name}} items</h1>
+    <ul>
+        {%for item in items%}
+        <li><a href="/catalog/{{item.category.name}}/{{item.name}}">{{item.name}}</a></li>
+        {%endfor%}
+    </ul>
+  </div>
+  {%if 'username'in session %}
+  <div class="col-md-6 pt-4 text-right">
+    <!-- <h4>Actions</h4> -->
+    <a class="btn btn-outline-success" href="/catalog/{{category.name}}/item/new">Add new item</a> 
+    {%if category.user_id == session['user_id']%}
+    <a class="btn btn-outline-primary" href="/catalog/{{category.name}}/edit">Edit category</a> 
+    <a class="btn btn-outline-danger" href="/catalog/{{category.name}}/delete">Delete category</a> 
+    {%endif%}
+  </div>
+  {%endif%}
+</div>
+  
+    
+    
+{%endblock%}
+    
+    
