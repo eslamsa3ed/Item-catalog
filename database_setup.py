@@ -7,7 +7,9 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 
 Base = declarative_base()
-env = json.loads(open('env.json', 'r').read())
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+envPath = os.path.join(ROOT_DIR, 'env.json')
+env = json.loads(open(envPath, 'r').read())
 
 class User(Base):
     """Create user table"""
