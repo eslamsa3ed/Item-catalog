@@ -28,8 +28,8 @@ env = json.loads(open('env.json', 'r').read())
 secrets = json.loads(open('client_secret.json', 'r').read())
 
 # Connect to the database and create a database session.
-engine = create_engine('sqlite:///item_catalog.db',
-                       connect_args={'check_same_thread': False})
+engine = create_engine("postgresql://"+env["POSTGRES_USER"]+":"+env["POSTGRES_PW"]+"@"+env["POSTGRES_URL"]+"/"+env["POSTGRES_DB"],
+                       client_encoding='utf8')
 
 # Bind the above engine to a session.
 Session = sessionmaker(bind=engine)

@@ -1,11 +1,13 @@
 import os
 import sys
+import json
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 
 Base = declarative_base()
+env = json.loads(open('env.json', 'r').read())
 
 class User(Base):
     """Create user table"""
@@ -63,6 +65,6 @@ class Item(Base):
             'category_id': self.category_id
             }
 
-
-engine = create_engine('sqlite:///item_catalog.db')
+engine = create_engine("postgresql://"+env["POSTGRES_USER"]+":"+env["POSTGRES_PW"]+"@"+env["POSTGRES_URL"]+"/"+env["POSTGRES_DB"],
+                       client_encoding='utf8')
 Base.metadata.create_all(engine)
