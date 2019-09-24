@@ -19,14 +19,17 @@ import json
 import random
 import requests
 import string
+import os
 
 app = Flask(__name__)
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # load env file which contain our secrets \(0_0)/
-env = json.loads(open('env.json', 'r').read())
+envPath = os.path.join(ROOT_DIR, 'env.json')
+env = json.loads(open(envPath, 'r').read())
 # google secrets
-secrets = json.loads(open('client_secret.json', 'r').read())
-
+secretsPath = os.path.join(ROOT_DIR, 'client_secret.json')
+secrets = json.loads(open(secretsPath, 'r').read())
 # Connect to the database and create a database session.
 engine = create_engine("postgresql://"+env["POSTGRES_USER"]+":"+env["POSTGRES_PW"]+"@"+env["POSTGRES_URL"]+"/"+env["POSTGRES_DB"],
                        client_encoding='utf8')
@@ -310,7 +313,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secret.json', scope='')
+        oauth_flow = flow_from_clientsecrets('secretsPath', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
